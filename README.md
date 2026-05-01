@@ -1,1 +1,2 @@
 "# Pokemon-Wordle" 
+"# pokemon-wordle" 
