@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link href="src/style.css" rel="stylesheet">
+    <title>Pokédle</title>
+  </head>
+  <body class="bg-gray-800 min-h-screen">
+    <div id="logo" class="flex justify-center ">
+      <img class="h-25 w-auto" src="https://imgs.search.brave.com/MlTKz2zj4-b88bP7nVQVuveIfI8UrG1VJon-knh5R28/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9jZG4u/d29ybGR2ZWN0b3Js/b2dvLmNvbS9sb2dv/cy9wb2tlbW9uLTIz/LnN2Zw">
+    </div>
+    <div id="pokemon-silhouette">
+      <img class="filter brightness-0 w-50 m-auto" src="https://imgs.search.brave.com/i8g65oy-A8QtbitFo1CPcpI9URRBnFAQVKK1Busjs8E/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93d3cu/cG9rZW1vbi5jb20v/c3RhdGljLWFzc2V0/cy9jb250ZW50LWFz/c2V0cy9jbXMyL2lt/Zy9wb2tlZGV4L2Z1/bGwvMDA2LnBuZw"> 
+    </div>
+    <div id="search-bar" class="h-10 flex justify-center mb-4">
+      <input class="text-xl text-white text-center bg-gray-400 rounded-full w-110 md:w-160" type="text" placeholder="Search..." id="search">
+    </div>
+    <div id="guesses" class="grid grid-rows-none justify-center gap-y-2 text-center">
+      <div id="guess-headers" class="grid grid-cols-6 justify-center gap-x-2 text-center">
+        <p>Gen</p><p>Type 1</p><p>Type 2</p><p>Weight</p><p>Height</p><p>Guess</p>
+      </div>
+      <div id="guess-1" class="grid grid-cols-6 gap-x-2 items-center w-100" hidden>
+        <img class="w-15 h-auto m-auto" src="/src/assets/blank_pokeball.svg">
+        <img class="w-15 h-auto m-auto" src="/src/assets/blank_pokeball.svg">
+        <img class="w-15 h-auto m-auto" src="/src/assets/blank_pokeball.svg">
+        <img class="w-15 h-auto m-auto" src="/src/assets/blank_pokeball.svg">
+        <img class="w-15 h-auto m-auto" src="/src/assets/blank_pokeball.svg">
+        <p class="pb-1" id="constGuess1"></p>
+      </div>
+      <div id="guess-2" class="grid grid-cols-6 gap-x-2 items-center w-100" hidden>
+        <img class="w-15 h-auto m-auto" src="/src/assets/blank_pokeball.svg">
+        <img class="w-15 h-auto m-auto" src="/src/assets/blank_pokeball.svg">
+        <img class="w-15 h-auto m-auto" src="/src/assets/blank_pokeball.svg">
+        <img class="w-15 h-auto m-auto" src="/src/assets/blank_pokeball.svg">
+        <img class="w-15 h-auto m-auto" src="/src/assets/blank_pokeball.svg">
+        <p class="pb-1" id="constGuess2"></p>
+      </div>
+      <div id="guess-3" class="grid grid-cols-6 gap-x-2 items-center w-100" hidden>
+        <img class="w-15 h-auto m-auto" src="/src/assets/blank_pokeball.svg">
+        <img class="w-15 h-auto m-auto" src="/src/assets/blank_pokeball.svg">
+        <img class="w-15 h-auto m-auto" src="/src/assets/blank_pokeball.svg">
+        <img class="w-15 h-auto m-auto" src="/src/assets/blank_pokeball.svg">
+        <img class="w-15 h-auto m-auto" src="/src/assets/blank_pokeball.svg">
+        <p class="pb-1" id="constGuess3"></p>
+      </div>
+      <div id="guess-4" class="grid grid-cols-6 gap-x-2 items-center w-100" hidden>
+        <img class="w-15 h-auto m-auto" src="/src/assets/blank_pokeball.svg">
+        <img class="w-15 h-auto m-auto" src="/src/assets/blank_pokeball.svg">
+        <img class="w-15 h-auto m-auto" src="/src/assets/blank_pokeball.svg">
+        <img class="w-15 h-auto m-auto" src="/src/assets/blank_pokeball.svg">
+        <img class="w-15 h-auto m-auto" src="/src/assets/blank_pokeball.svg">
+        <p class="pb-1" id="constGuess4"></p>
+      </div>
+      <div id="guess-5" class="grid grid-cols-6 gap-x-2 items-center w-100" hidden>
+        <img class="w-15 h-auto m-auto" src="/src/assets/blank_pokeball.svg">
+        <img class="w-15 h-auto m-auto" src="/src/assets/blank_pokeball.svg">
+        <img class="w-15 h-auto m-auto" src="/src/assets/blank_pokeball.svg">
+        <img class="w-15 h-auto m-auto" src="/src/assets/blank_pokeball.svg">
+        <img class="w-15 h-auto m-auto" src="/src/assets/blank_pokeball.svg">
+        <p class="pb-1" id="constGuess5"></p>
+      </div>
+      <div id="guess-6" class="grid grid-cols-6 gap-x-2 items-center w-100" hidden>
+        <img class="w-15 h-auto m-auto" src="/src/assets/blank_pokeball.svg">
+        <img class="w-15 h-auto m-auto" src="/src/assets/blank_pokeball.svg">
+        <img class="w-15 h-auto m-auto" src="/src/assets/blank_pokeball.svg">
+        <img class="w-15 h-auto m-auto" src="/src/assets/blank_pokeball.svg">
+        <img class="w-15 h-auto m-auto" src="/src/assets/blank_pokeball.svg">
+        <p class="pb-1" id="constGuess6"></p>
+      </div>
+      <div id="guess-7" class="grid grid-cols-6 gap-x-2 items-center w-100" hidden>
+        <img class="w-15 h-auto m-auto" src="/src/assets/blank_pokeball.svg">
+        <img class="w-15 h-auto m-auto" src="/src/assets/blank_pokeball.svg">
+        <img class="w-15 h-auto m-auto" src="/src/assets/blank_pokeball.svg">
+        <img class="w-15 h-auto m-auto" src="/src/assets/blank_pokeball.svg">
+        <img class="w-15 h-auto m-auto" src="/src/assets/blank_pokeball.svg">
+        <p class="pb-1" id="constGuess7"></p>
+      </div>
+      <div id="guess-8" class="grid grid-cols-6 gap-x-2 items-center w-100" hidden>
+        <img class="w-15 h-auto m-auto" src="/src/assets/blank_pokeball.svg">
+        <img class="w-15 h-auto m-auto" src="/src/assets/blank_pokeball.svg">
+        <img class="w-15 h-auto m-auto" src="/src/assets/blank_pokeball.svg">
+        <img class="w-15 h-auto m-auto" src="/src/assets/blank_pokeball.svg">
+        <img class="w-15 h-auto m-auto" src="/src/assets/blank_pokeball.svg">
+        <p class="pb-1" id="constGuess8"></p>
+      </div>
+    </div>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
