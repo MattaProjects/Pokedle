@@ -1,5 +1,1 @@
-"# Pokemon-Wordle" 
-"# pokemon-wordle" 
-"# Pokedle" 
-"# Pokedle" 
 "# Pokedle" 
