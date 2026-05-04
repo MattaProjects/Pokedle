@@ -295,3 +295,7 @@ code {
     border-right-color: var(--border);
   }
 }
+
+#dropdown {
+    scrollbar-width: none;
+}
