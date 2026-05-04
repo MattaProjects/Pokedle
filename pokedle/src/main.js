@@ -1,3 +1,9 @@
+import correctPokeball from './assets/correct_pokeball.svg';
+import blankPokeball from './assets/blank_pokeball.svg';
+import midPokeball from './assets/mid_pokeball.svg';
+import incPokeball from './assets/inc_pokeball.svg';
+import decPokeball from './assets/dec_pokeball.svg';
+
 let searchValue = document.getElementById("search");
 let guessedValue = document.getElementById("constGuess")
 let searchbarValue = document.getElementById("search-bar");
@@ -61,11 +67,11 @@ searchValue.addEventListener("keydown", async function(event) {
         if (guessedValue == "ditto..."){
             pokemonSpriteValue.src = dittoGrab.sprites.front_default;
             pokemonSpriteValue.classList.replace("brightness-0", "brightness-100");
-            document.getElementById(`gen-${count+1}`).src = "/src/assets/correct_pokeball.svg";
-            document.getElementById(`type1-${count+1}`).src = "/src/assets/correct_pokeball.svg"
-            document.getElementById(`type2-${count+1}`).src = "/src/assets/correct_pokeball.svg"
-            document.getElementById(`weight-${count+1}`).src = "/src/assets/correct_pokeball.svg"
-            document.getElementById(`height-${count+1}`).src = "/src/assets/correct_pokeball.svg"
+            document.getElementById(`gen-${count+1}`).src = correctPokeball;
+            document.getElementById(`type1-${count+1}`).src = correctPokeball;
+            document.getElementById(`type2-${count+1}`).src = correctPokeball;
+            document.getElementById(`weight-${count+1}`).src = correctPokeball;
+            document.getElementById(`height-${count+1}`).src = correctPokeball;
 
             document.getElementById(`guess-${count + 1}`).removeAttribute("hidden");
             document.getElementById(`constGuess${count + 1}`).textContent = guessedValue.charAt(0).toUpperCase() + guessedValue.slice(1);
@@ -93,11 +99,11 @@ searchValue.addEventListener("keydown", async function(event) {
         if (currentPokemon.name == correctPokemon.name){
             document.getElementById("pokemon-text").textContent = `The Pokémon is  ${guessedValue.charAt(0).toUpperCase() + guessedValue.slice(1)}!`;
             pokemonSpriteValue.classList.replace("brightness-0", "brightness-100");
-            document.getElementById(`gen-${count+1}`).src = "/src/assets/correct_pokeball.svg";
-            document.getElementById(`type1-${count+1}`).src = "/src/assets/correct_pokeball.svg"
-            document.getElementById(`type2-${count+1}`).src = "/src/assets/correct_pokeball.svg"
-            document.getElementById(`weight-${count+1}`).src = "/src/assets/correct_pokeball.svg"
-            document.getElementById(`height-${count+1}`).src = "/src/assets/correct_pokeball.svg"
+            document.getElementById(`gen-${count+1}`).src = correctPokeball;
+            document.getElementById(`type1-${count+1}`).src = correctPokeball;
+            document.getElementById(`type2-${count+1}`).src = correctPokeball;
+            document.getElementById(`weight-${count+1}`).src = correctPokeball;
+            document.getElementById(`height-${count+1}`).src = correctPokeball;
 
             document.getElementById(`guess-${count + 1}`).removeAttribute("hidden");
             document.getElementById(`constGuess${count + 1}`).textContent = guessedValue.charAt(0).toUpperCase() + guessedValue.slice(1);
@@ -202,56 +208,53 @@ async function fetchData(data){
 
 function checkGuess(guess, pokemon, count){
     if (guess.generation == pokemon.generation){
-        document.getElementById(`gen-${count+1}`).src = "/src/assets/correct_pokeball.svg";
-        console.log("HERE! 1")
+        document.getElementById(`gen-${count+1}`).src = correctPokeball;
     }
     else if ((guess.generation == (pokemon.generation) + 1) || (guess.generation == (pokemon.generation) - 1)){
-        document.getElementById(`gen-${count+1}`).src = "/src/assets/mid_pokeball.svg";
-        console.log("HERE! 2")
+        document.getElementById(`gen-${count+1}`).src = midPokeball;
     }
     else{
-        document.getElementById(`gen-${count+1}`).src = "/src/assets/blank_pokeball.svg";
-        console.log("HERE! 3")
+        document.getElementById(`gen-${count+1}`).src = blankPokeball;
     }
 
     if (guess.type1 == pokemon.type1){
-        document.getElementById(`type1-${count+1}`).src = "/src/assets/correct_pokeball.svg"
+        document.getElementById(`type1-${count+1}`).src = correctPokeball;
     }
     else if (guess.type1 == pokemon.type2){
-        document.getElementById(`type1-${count+1}`).src = "/src/assets/mid_pokeball.svg";
+        document.getElementById(`type1-${count+1}`).src = midPokeball;
     }
     else{
-        document.getElementById(`type1-${count+1}`).src = "/src/assets/blank_pokeball.svg";
+        document.getElementById(`type1-${count+1}`).src = blankPokeball;
     }
     
     if (guess.type2 == pokemon.type2){
-        document.getElementById(`type2-${count+1}`).src = "/src/assets/correct_pokeball.svg"
+        document.getElementById(`type2-${count+1}`).src = correctPokeball;
     }
     else if (guess.type2 == pokemon.type1){
-        document.getElementById(`type2-${count+1}`).src = "/src/assets/mid_pokeball.svg";
+        document.getElementById(`type2-${count+1}`).src = midPokeball;
     }
     else{
-        document.getElementById(`type2-${count+1}`).src = "/src/assets/blank_pokeball.svg";
+        document.getElementById(`type2-${count+1}`).src = blankPokeball;
     }
 
     if (guess.pokemonWeight == pokemon.pokemonWeight){
-        document.getElementById(`weight-${count+1}`).src = "/src/assets/correct_pokeball.svg"
+        document.getElementById(`weight-${count+1}`).src = correctPokeball;
     }
     else if (guess.pokemonWeight > pokemon.pokemonWeight){
-        document.getElementById(`weight-${count+1}`).src = "/src/assets/dec_pokeball.svg"
+        document.getElementById(`weight-${count+1}`).src = decPokeball;
     }
     else{
-        document.getElementById(`weight-${count+1}`).src = "/src/assets/inc_pokeball.svg"
+        document.getElementById(`weight-${count+1}`).src = incPokeball;
     }
 
     if (guess.pokemonHeight == pokemon.pokemonHeight){
-        document.getElementById(`height-${count+1}`).src = "/src/assets/correct_pokeball.svg"
+        document.getElementById(`height-${count+1}`).src = correctPokeball;
     }
     else if (guess.pokemonHeight > pokemon.pokemonHeight){
-        document.getElementById(`height-${count+1}`).src = "/src/assets/dec_pokeball.svg"
+        document.getElementById(`height-${count+1}`).src = decPokeball;
     }
     else{
-        document.getElementById(`height-${count+1}`).src = "/src/assets/inc_pokeball.svg"
+        document.getElementById(`height-${count+1}`).src = incPokeball;
     }
     return;
 }
@@ -289,12 +292,3 @@ function getGeneration(gen){
         console.log("Unknown generation");
 }
 }
-
-/*IMPORTANT NOTES (MAY 1)
-
-- Lock guesses to only appear in the pokedex (DONE)
-    - Could make dropdown with all the data, but that's a later feature
-- Make variables for all stats (optional, but would help with readability) (DONE)
-- Check for all stats if the name doesn't match the correct guess (IN PROGRESS)
-
-*/
