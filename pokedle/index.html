@@ -8,17 +8,17 @@
     <title>Pokédle</title>
   </head>
   <body class="bg-gray-800 min-h-screen">
-    <div id="logo" class="flex justify-center ">
-      <img class="h-25 w-auto" src="https://imgs.search.brave.com/MlTKz2zj4-b88bP7nVQVuveIfI8UrG1VJon-knh5R28/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9jZG4u/d29ybGR2ZWN0b3Js/b2dvLmNvbS9sb2dv/cy9wb2tlbW9uLTIz/LnN2Zw">
+    <div id="logo" class="flex justify-center pt-6">
+      <img draggable="false" class="h-25 w-auto" src="https://imgs.search.brave.com/MlTKz2zj4-b88bP7nVQVuveIfI8UrG1VJon-knh5R28/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9jZG4u/d29ybGR2ZWN0b3Js/b2dvLmNvbS9sb2dv/cy9wb2tlbW9uLTIz/LnN2Zw">
     </div>
     <div id="pokemon-silhouette">
-      <img class="filter brightness-0 w-auto md:w-60 m-auto -py-0" id="pokemonSprite" src=""> 
+      <img draggable="false" class="filter brightness-0 w-auto md:w-60 m-auto -py-0" id="pokemonSprite" src="">
       <p class="text-white text-center pb-4" id="pokemon-text"></p>
     </div>
-    <div id="search-bar" class="flex justify-center mb-4">
+    <div id="search-bar" class="flex justify-center my-4">
       <div class="relative w-110 md:w-160">
         <input class="text-xl text-white text-center bg-gray-400 rounded-full w-full" type="text" placeholder="Search..." id="search">
-        <div id="dropdown" class="absolute justify-center top-full left-1/2 -translate-x-1/2 w-lg z-10 max-h-64 overflow-y-auto" hidden></div>
+        <div id="dropdown" class="absolute justify-center top-full left-1/2 -translate-x-1/2 w-lg z-10 max-h-48 overflow-y-auto" hidden></div>
       </div>
     </div>
     <div id="guesses" class="grid grid-rows-none justify-center gap-y-2 text-center">
@@ -26,16 +26,16 @@
         <p>Gen</p><p>Type 1</p><p>Type 2</p><p>Weight</p><p>Height</p><p>Guess</p>
       </div>
       <div id="guess-1" class="grid grid-cols-6 gap-x-2 items-center w-100" hidden>
-        <img class="w-15 h-auto m-auto" id="gen-1" src="">
-        <img class="w-15 h-auto m-auto" id="type1-1" src="">
-        <img class="w-15 h-auto m-auto" id="type2-1" src="">
-        <img class="w-15 h-auto m-auto" id="weight-1" src="">
-        <img class="w-15 h-auto m-auto" id="height-1" src="">
+        <img draggable="false" class="w-15 h-auto m-auto" id="gen-1" src="">
+        <img draggable="false" class="w-15 h-auto m-auto" id="type1-1" src="">
+        <img draggable="false" class="w-15 h-auto m-auto" id="type2-1" src="">
+        <img draggable="false" class="w-15 h-auto m-auto" id="weight-1" src="">
+        <img draggable="false" class="w-15 h-auto m-auto" id="height-1" src="">
         <p class="pb-1" id="constGuess1"></p>
       </div>
       <div id="guess-2" class="grid grid-cols-6 gap-x-2 items-center w-100" hidden>
-        <img class="w-15 h-auto m-auto" id="gen-2" src="">
-        <img class="w-15 h-auto m-auto" id="type1-2" src="">
+        <img draggable="false" class="w-15 h-auto m-auto" id="gen-2" src="">
+        <img draggable="false" class="w-15 h-auto m-auto" id="type1-2" src="">
         <img class="w-15 h-auto m-auto" id="type2-2" src="">
         <img class="w-15 h-auto m-auto" id="weight-2" src="">
         <img class="w-15 h-auto m-auto" id="height-2" src="">
@@ -89,6 +89,9 @@
         <img class="w-15 h-auto m-auto" id="height-8" src="">
         <p class="pb-1" id="constGuess8"></p>
       </div>
+    </div>
+    <div class="bg-gray-800">
+      <button id="reset-game" class="flex justify-center text-xl text-white text-center bg-gray-700 rounded-full border-radius-300 mt-4 mb-8 mx-auto px-6 py-3" hidden>New Game</button>
     </div>
     <script type="module" src="/src/main.js"></script>
   </body>

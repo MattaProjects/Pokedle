@@ -7,13 +7,13 @@ import decPokeball from './assets/dec_pokeball.svg';
 let searchValue = document.getElementById("search");
 let guessedValue = document.getElementById("constGuess")
 let searchbarValue = document.getElementById("search-bar");
+let pokemonSpriteValue = document.getElementById("pokemonSprite");
 
 let guessSet = new Set();
 let count = 0;
 let pokemonData = await fetchData(Math.floor(Math.random() * (1024) + 1));
 let speciesResponse = await fetch(pokemonData.species.url);
 let speciesData = await speciesResponse.json();
-let pokemonSpriteValue = document.getElementById("pokemonSprite");
 pokemonSpriteValue.src = pokemonData.sprites.front_default;
 let pokemonName = pokemonData.species.name;
 
@@ -37,17 +37,22 @@ let correctPokemon = {
     pokemonWeight: pokemonData.weight / 10
 }
 
+let debounceTimer;
+
 searchValue.addEventListener("input", async function() {
     const query = searchValue.value.toLowerCase();
     if (query === "") { hideDropdown(); return; }
 
-    const matches = pokemonNames
-        .filter(name => name.startsWith(query))
-        .slice(0, 20);
+    clearTimeout(debounceTimer);
+    debounceTimer = setTimeout(async () => {
+        const matches = pokemonNames
+            .filter(name => !name.includes('-') && name.startsWith(query))
+            .slice(0, 20);
 
-    if (matches.length === 0) { hideDropdown(); return; }
+        if (matches.length === 0) { hideDropdown(); return; }
 
-    await showDropdown(matches);
+        await showDropdown(matches, query);
+    }, 100);
 });
 
 searchValue.addEventListener("keydown", async function(event) {
@@ -77,6 +82,7 @@ searchValue.addEventListener("keydown", async function(event) {
             document.getElementById(`constGuess${count + 1}`).textContent = guessedValue.charAt(0).toUpperCase() + guessedValue.slice(1);
             document.getElementById("pokemon-text").textContent = `The pokemon is ${guessedValue.charAt(0).toUpperCase() + guessedValue.slice(1)}?!`;
             hideDropdown();
+            document.getElementById("reset-game").removeAttribute("hidden");
             return;
         }
         let guessData = await fetchData(guessedValue);
@@ -108,6 +114,7 @@ searchValue.addEventListener("keydown", async function(event) {
             document.getElementById(`guess-${count + 1}`).removeAttribute("hidden");
             document.getElementById(`constGuess${count + 1}`).textContent = guessedValue.charAt(0).toUpperCase() + guessedValue.slice(1);
             hideDropdown();
+            document.getElementById("reset-game").removeAttribute("hidden");
             return;
         }
 
@@ -147,12 +154,16 @@ async function getDropdownData(name) {
     return { data, speciesData };
 }
 
-async function showDropdown(matches) {
+async function showDropdown(matches, query) {
     const dropdown = document.getElementById("dropdown");
     dropdown.innerHTML = "";
 
     for (const name of matches) {
+        if (searchValue.value.toLowerCase() !== query) return;
+
         const { data, speciesData } = await getDropdownData(name);
+
+        if (searchValue.value.toLowerCase() !== query) return;
 
         const gen = getGeneration(speciesData.generation.name);
         const type1 = data.types[0]?.type.name ?? "-";
@@ -163,7 +174,7 @@ async function showDropdown(matches) {
         const item = document.createElement("div");
         item.className = "flex flex-col text-black bg-white hover:bg-gray-100 border border-gray-200 cursor-pointer px-2 py-1";
         item.innerHTML = `
-            <p class="text-center font-bold">${name.charAt(0).toUpperCase() + name.slice(1)}</p>
+            <p class="text-center font-bold">${speciesData.name.charAt(0).toUpperCase() + speciesData.name.slice(1)}</p>
             <div class="grid grid-cols-4 text-center text-sm text-black">
                 <p>Gen: ${gen}</p>
                 <p>${type1.charAt(0).toUpperCase() + type1.slice(1)}/${type2 == "-" ? "None" : type2.charAt(0).toUpperCase() + type2.slice(1)}</p>
@@ -173,7 +184,7 @@ async function showDropdown(matches) {
         `;
 
         item.addEventListener("click", () => {
-            searchValue.value = name;
+            searchValue.value = speciesData.name;
             hideDropdown();
         });
 
@@ -292,3 +303,42 @@ function getGeneration(gen){
         console.log("Unknown generation");
 }
 }
+
+document.getElementById("reset-game").addEventListener("click", resetGame);
+
+async function resetGame(){
+    for (let i = 0; i < 8; i++){
+        document.getElementById(`guess-${i + 1}`).setAttribute("hidden", "");
+        document.getElementById(`gen-${i+1}`).src = "";
+        document.getElementById(`type1-${i+1}`).src = "";
+        document.getElementById(`type2-${i+1}`).src = "";
+        document.getElementById(`weight-${i+1}`).src = "";
+        document.getElementById(`height-${i+1}`).src = "";
+        document.getElementById(`constGuess${i + 1}`).textContent = "";
+    }
+    document.getElementById("pokemon-text").textContent = "";
+    searchValue.value = "";
+    guessSet = new Set();
+    count = 0;
+    pokemonData = await fetchData(Math.floor(Math.random() * (1024) + 1));
+    speciesResponse = await fetch(pokemonData.species.url);
+    speciesData = await speciesResponse.json();
+    pokemonSpriteValue.src = pokemonData.sprites.front_default;
+    pokemonName = pokemonData.species.name;
+    correctPokemon = {
+        name: pokemonData.name,
+        generation: getGeneration(speciesData.generation.name),
+        type1: pokemonData.types[0]?.type.name,
+        type2: pokemonData.types[1]?.type.name ?? null,
+        pokemonHeight: pokemonData.height / 10,
+        pokemonWeight: pokemonData.weight / 10
+    }
+    pokemonSpriteValue.classList.replace("brightness-100", "brightness-0");
+    document.getElementById("reset-game").setAttribute("hidden", "");
+}
+
+/*
+Notes: Keep images from being draggable (logos pokeballs pokemon).
+Edit logo and search bar to be lower on screen.
+Add "next" button.
+*/
